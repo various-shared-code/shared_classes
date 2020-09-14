@@ -1,5 +1,7 @@
 package classes
 
+import "encoding/json"
+
 type Hit struct {
 	ID         int64  `json:"id"`
 	DateTime   int64  `json:"date_time"`
@@ -9,4 +11,13 @@ type Hit struct {
 	PageID     int64  `json:"page_id"`
 	ServerHit  bool   `json:"server_hit"`
 	SessionID  string `json:"session_id"`
+}
+
+func (p Hit) ToJson() []byte {
+	js, _ := json.Marshal(p)
+	return js
+}
+
+func (p Hit) ToJsonString() string {
+	return string(p.ToJson())
 }
